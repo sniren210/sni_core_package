@@ -5,25 +5,6 @@ Future<void> _initializeSettings({
   String? defaultCountryCode,
   String? defaultLanguageCode,
 }) async {
-  GetIt.I.registerLazySingleton<CountrySetting>(
-    () => CountrySettingImpl(
-      defaultValue: defaultCountryCode ?? 'USA',
-      preferences: GetIt.I(),
-    ),
-  );
-
-  GetIt.I.registerLazySingleton<CurrencySetting>(
-    () => CurrencySettingImpl(
-      defaultValue: defaultCurrencyCode ?? 'USD',
-      preferences: GetIt.I(),
-      supportedCurrencies: null,
-      // TODO: konfig currency
-      // supportedCurrencies: Sni.instance.defaultCurrencies.isEmpty
-      //     ? null
-      //     : Sni.instance.defaultCurrencies.map((e) => e.code).toList(),
-    ),
-  );
-
   GetIt.I.registerLazySingleton<LocaleSetting>(
     () => LocaleSettingImpl(
       defaultValue: defaultLanguageCode ?? 'en',

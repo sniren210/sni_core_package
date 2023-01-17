@@ -10,17 +10,7 @@ class Sni {
   final List<Interceptor> _interceptors = [];
   bool _enablePerformanceMonitoring = false;
 
-  // TODO: konfig currency
-  // List<Currency> _defaultCurrencies = const [
-  //   Currency(code: 'USD', name: 'US Dollar', countryCode: 'US', symbol: r'$'),
-  //   Currency(code: 'IDR', name: 'Rupiah', countryCode: 'ID', symbol: 'Rp'),
-  //   Currency(code: 'JPY', name: 'Yen', countryCode: 'JP', symbol: '¥'),
-  // ];
-
   List<Locale>? _supportedLocales;
-
-  // TODO: konfig currency
-  // List<Currency> get defaultCurrencies => _defaultCurrencies;
 
   static late List<SniPluginRegistrant> _registrants;
 
@@ -35,13 +25,9 @@ class Sni {
     String? domain,
     List<Interceptor>? interceptors,
 
-    // TODO: model untuk currency dan country
-    // List<Country>? countryOverrides,
-    // List<Currency>? currencyOverrides,
-
+    //
     String? defaultCountryCode,
     String? defaultLanguageCode,
-    String? defaultCurrencyCode,
     bool enablePerformanceMonitoring = true,
 
     /// Handle how UI render Error at HttpExceptions or InternalServerExceptions
@@ -62,6 +48,9 @@ class Sni {
     // }
 
     final sni = Sni.instance;
+
+    sni._enablePerformanceMonitoring = enablePerformanceMonitoring;
+    sni._defaultThemeMode = defaultThemeMode;
 
     // TODO: domain config
     // Service.domain = domain ?? 'sniren.my.id';
@@ -87,18 +76,12 @@ class Sni {
 
     await _initializeDependencies(
       defaultCountryCode: defaultCountryCode,
-      defaultCurrencyCode: defaultCurrencyCode,
       defaultLanguageCode: defaultLanguageCode,
     );
 
     timeago.setLocaleMessages('ja', timeago.JaMessages());
     timeago.setLocaleMessages('id', timeago.IdMessages());
     timeago.setLocaleMessages('ar', timeago.ArMessages());
-
-    // TODO: konfig currency
-    // if (currencyOverrides != null) {
-    //   sni._defaultCurrencies = List.from(currencyOverrides, growable: false);
-    // }
 
     sni._interceptors.clear();
 

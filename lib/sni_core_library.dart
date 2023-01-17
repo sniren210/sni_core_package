@@ -15,8 +15,6 @@ import 'package:timeago/timeago.dart' as timeago;
 part 'src/core/injector/injector.dart';
 part 'src/core/injector/settings/settings.dart';
 part 'src/core/helpers/sni.dart';
-part 'src/presentation/providers/country/country_setting.dart';
-part 'src/presentation/providers/currency/currency_setting.dart';
 part 'src/presentation/providers/locale/locale_setting.dart';
 part 'src/presentation/providers/motion/motion_setting.dart';
 part 'src/presentation/providers/sound/sound_setting.dart';
