@@ -18,6 +18,10 @@ dependencies:
   injectable: ^2.1.0
   shared_preferences: ^2.0.16
   timeago: ^3.3.0
+  connectivity_plus: ^3.0.2
+
+  sni_http:
+    git: https://github.com/sniren210/sni_http_package.git
 
 dev_dependencies:
   flutter_test:

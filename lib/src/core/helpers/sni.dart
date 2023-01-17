@@ -10,7 +10,6 @@ class Sni {
   ThemeMode? _defaultThemeMode;
 
   final List<Interceptor> _interceptors = [];
-  bool _enablePerformanceMonitoring = false;
 
   List<Locale>? _supportedLocales;
 
@@ -51,13 +50,11 @@ class Sni {
 
     final sni = Sni.instance;
 
-    sni._enablePerformanceMonitoring = enablePerformanceMonitoring;
     sni._defaultThemeMode = defaultThemeMode;
 
     // TODO: domain config
     // Service.domain = domain ?? 'sniren.my.id';
 
-    sni._enablePerformanceMonitoring = enablePerformanceMonitoring;
     sni._defaultThemeMode = defaultThemeMode;
 
     // check every locales are supported by plugins

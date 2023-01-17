@@ -24,45 +24,40 @@ Future<void> _initializeDependencies({
     defaultLanguageCode: defaultLanguageCode,
   );
 
-  // final interceptors = [
-  //   _ThrottleInterceptor(
-  //     requestPerSecond: 200,
-  //   ),
-  //   _ConfigInterceptor(
-  //     countrySetting: GetIt.I(),
-  //     currencySetting: GetIt.I(),
-  //     localeSetting: GetIt.I(),
-  //     themeModeSetting: GetIt.I(),
-  //     vibrationSetting: GetIt.I(),
-  //     soundSetting: GetIt.I(),
-  //     motionSetting: GetIt.I(),
-  //   ),
-  //   _RetryInterceptor(),
-  //   _ConnectivityInterceptor(),
-  // ];
+  final interceptors = [
+    _ThrottleInterceptor(
+      requestPerSecond: 200,
+    ),
+    _ConfigInterceptor(
+      localeSetting: GetIt.I(),
+      themeModeSetting: GetIt.I(),
+      vibrationSetting: GetIt.I(),
+      soundSetting: GetIt.I(),
+      motionSetting: GetIt.I(),
+    ),
+    _RetryInterceptor(),
+    _ConnectivityInterceptor(),
+  ];
 
-  // GetIt.I.registerSingleton(
-  //   DefaultInterceptors(
-  //     interceptors: [
-  //       if (!isWebPlatform) _UserAgentInterceptor(),
-  //       ...interceptors,
-  //       if (Xetia.instance._enablePerformanceMonitoring)
-  //         _performanceInterceptor,
-  //     ],
-  //   ),
-  // );
+  GetIt.I.registerSingleton(
+    DefaultInterceptors(
+      interceptors: [
+        ...interceptors,
+      ],
+    ),
+  );
 
-  // GetIt.I.registerFactory<HttpService>(
-  //   () => HttpService(
-  //     BaseOptions(
-  //       contentType: 'application/json',
-  //       responseType: ResponseType.json,
-  //     ),
-  //   )..interceptors.addAll([
-  //       ...GetIt.I<DefaultInterceptors>().interceptors,
-  //       ...Xetia.instance._pluginInterceptors,
-  //     ]),
-  // );
+  GetIt.I.registerFactory<HttpService>(
+    () => HttpService(
+      BaseOptions(
+        contentType: 'application/json',
+        responseType: ResponseType.json,
+      ),
+    )..interceptors.addAll([
+        ...GetIt.I<DefaultInterceptors>().interceptors,
+        ...Sni.instance._pluginInterceptors,
+      ]),
+  );
 
   // @Injectable and @Singleton
   initInjectable(GetIt.I);
