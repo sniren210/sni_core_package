@@ -20,11 +20,11 @@ Future<void> _initializeDependencies({
   GetIt.I.registerLazySingleton(() => preferences);
 
   // settings
-  // await _initializeSettings(
-  //   defaultCurrencyCode: defaultCurrencyCode,
-  //   defaultCountryCode: defaultCountryCode,
-  //   defaultLanguageCode: defaultLanguageCode,
-  // );
+  await _initializeSettings(
+    defaultCurrencyCode: defaultCurrencyCode,
+    defaultCountryCode: defaultCountryCode,
+    defaultLanguageCode: defaultLanguageCode,
+  );
 
   // final interceptors = [
   //   _ThrottleInterceptor(
