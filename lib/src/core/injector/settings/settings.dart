@@ -1,7 +1,6 @@
 part of sni_core;
 
 Future<void> _initializeSettings({
-  String? defaultCurrencyCode,
   String? defaultCountryCode,
   String? defaultLanguageCode,
 }) async {

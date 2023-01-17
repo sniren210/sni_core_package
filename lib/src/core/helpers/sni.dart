@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field, unused_element
+
 part of sni_core;
 
 class Sni {
