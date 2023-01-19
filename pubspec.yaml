@@ -1,7 +1,8 @@
 name: sni_core
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
+repository: https://github.com/sniren210/sni_core_package
+publish_to: https://pub.dev/publishers/sniren.my.id/packages
 
 environment:
   sdk: ">=2.18.6 <3.0.0"
@@ -20,8 +21,8 @@ dependencies:
   timeago: ^3.3.0
   connectivity_plus: ^3.0.2
 
-  sni_http:
-    git: https://github.com/sniren210/sni_http_package.git
+  # SNI Package
+  sni_http: ^0.0.2
 
 dev_dependencies:
   flutter_test:
