@@ -25,7 +25,6 @@ class Sni {
     List<Interceptor>? interceptors,
 
     //
-    String? defaultCountryCode,
     String? defaultLanguageCode,
     bool enablePerformanceMonitoring = true,
 
@@ -71,7 +70,6 @@ class Sni {
     sni._supportedLocales = supportedLocales;
 
     await _initializeDependencies(
-      defaultCountryCode: defaultCountryCode,
       defaultLanguageCode: defaultLanguageCode,
     );
 

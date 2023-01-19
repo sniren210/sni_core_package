@@ -9,7 +9,6 @@ part of sni_core;
   ],
 )
 Future<void> _initializeDependencies({
-  String? defaultCountryCode,
   String? defaultLanguageCode,
 }) async {
   // _injectDependencies();
@@ -20,7 +19,6 @@ Future<void> _initializeDependencies({
 
   // settings
   await _initializeSettings(
-    defaultCountryCode: defaultCountryCode,
     defaultLanguageCode: defaultLanguageCode,
   );
 
