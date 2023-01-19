@@ -16,13 +16,11 @@ class Sni {
   static late List<SniPluginRegistrant> _registrants;
 
   static Future<void> initializeApp({
-    // TODO: konfigurasi firebase
-    // FirebaseOptions? firebaseOptions,
-
+    FirebaseOptions? firebaseOptions,
     required List<SniPluginRegistrant> plugins,
     required List<Locale>? supportedLocales,
 
-    /// base api domain, without http or https. e.g: api.xetia.io
+    /// base api domain, without http or https. e.g: sniren.my.id
     String? domain,
     List<Interceptor>? interceptors,
 
@@ -52,8 +50,7 @@ class Sni {
 
     sni._defaultThemeMode = defaultThemeMode;
 
-    // TODO: domain config
-    // Service.domain = domain ?? 'sniren.my.id';
+    Service.domain = domain ?? 'sniren.my.id';
 
     sni._defaultThemeMode = defaultThemeMode;
 
@@ -88,23 +85,22 @@ class Sni {
       sni._interceptors.addAll(interceptors);
     }
 
-    // TODO: konfigurasi firebase
-    // if (firebaseOptions != null) {
-    //   await Firebase.initializeApp(
-    //     options: firebaseOptions,
-    //   );
+    if (firebaseOptions != null) {
+      await Firebase.initializeApp(
+        options: firebaseOptions,
+      );
 
-    //   await FirebasePerformance.instance
-    //       .setPerformanceCollectionEnabled(kReleaseMode);
-    // }
+      await FirebasePerformance.instance
+          .setPerformanceCollectionEnabled(kReleaseMode);
+    }
 
-    //  if (!kIsWeb) {
-    //   await FirebaseCrashlytics.instance
-    //       .setCrashlyticsCollectionEnabled(kReleaseMode);
+    if (!kIsWeb) {
+      await FirebaseCrashlytics.instance
+          .setCrashlyticsCollectionEnabled(kReleaseMode);
 
-    //   await FirebaseCrashlytics.instance.setUserIdentifier('no-user');
-    //   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-    // }
+      await FirebaseCrashlytics.instance.setUserIdentifier('no-user');
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+    }
 
     for (final plugin in plugins) {
       await plugin.register();
@@ -167,15 +163,25 @@ class Sni {
           ..._pluginSupportedLocales,
       };
 
-  // TODO: Konfig database
-  // List<SembastService> _getSqliteServices(BuildContext context, int version) =>
-  //     _registrants.fold(
-  //       [],
-  //       (previousValue, element) => previousValue
-  //         ..addAll(
-  //           element.buildDatabaseService(context, version),
-  //         ),
-  //     );
+  List<SembastService> _getDatabaseSembastServices(
+          BuildContext context, int version) =>
+      _registrants.fold(
+        [],
+        (previousValue, element) => previousValue
+          ..addAll(
+            element.buildDatabaseSembastService(context, version),
+          ),
+      );
+
+  List<SQLiteService> _getDatabaseSqliteServices(
+          BuildContext context, int version) =>
+      _registrants.fold(
+        [],
+        (previousValue, element) => previousValue
+          ..addAll(
+            element.buildDatabaseSqliteService(context, version),
+          ),
+      );
 }
 
 abstract class SniPluginRegistrant {
@@ -187,12 +193,17 @@ abstract class SniPluginRegistrant {
   List<SingleChildWidget> get authenticatedRepositories => [];
   List<Interceptor> get interceptors => [];
 
-  // TODO: Konfig database
-  // List<SembastService> buildDatabaseService(
-  //   BuildContext context,
-  //   int databaseVersion,
-  // ) =>
-  //     [];
+  List<SembastService> buildDatabaseSembastService(
+    BuildContext context,
+    int databaseVersion,
+  ) =>
+      [];
+
+  List<SQLiteService> buildDatabaseSqliteService(
+    BuildContext context,
+    int databaseVersion,
+  ) =>
+      [];
 
   FutureOr<void> onSignedOut() async {}
 }
